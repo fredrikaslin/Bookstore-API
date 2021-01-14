@@ -10,7 +10,6 @@ namespace Bookstore_API.Controllers
         [HttpGet]
         public BookModel SearchBook(string ISBN)
         {
-
             var book = library.GetBook(ISBN);
             return book;
         }
