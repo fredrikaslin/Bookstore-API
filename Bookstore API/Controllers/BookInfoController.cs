@@ -1,7 +1,6 @@
 ﻿using Bookstore_API.Models;
 using Bookstore_API.Repository;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace Bookstore_API.Controllers
 {
@@ -11,10 +10,10 @@ namespace Bookstore_API.Controllers
 
 
         [HttpGet]
-        public ActionResult SearchBook(string ISBN)
+        public IHttpActionResult SearchBook(string ISBN)
         {
             var book = library.GetBook(ISBN);
-            return book;
+            return Ok(book);
 
         }
     }
