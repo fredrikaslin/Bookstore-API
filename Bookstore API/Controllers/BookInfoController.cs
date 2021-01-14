@@ -1,5 +1,6 @@
 ﻿using Bookstore_API.Models;
 using Bookstore_API.Repository;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Bookstore_API.Controllers
@@ -13,7 +14,9 @@ namespace Bookstore_API.Controllers
         public IHttpActionResult SearchBook(string ISBN)
         {
             var book = library.GetBook(ISBN);
-            return Ok(book);
+
+            var list = new List<BookModel>() { book };
+            return Ok(list);
 
         }
     }
