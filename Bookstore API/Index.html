@@ -9,19 +9,56 @@
 </head>
 
 <body>
-
-    <input type="text" id="searchInput">
-    <button type="button" id="searchButton"
-            class="btn btn-primary"
-            onclick="searchForBook();">
-        Search for book
-    </button>
-    <div class="row">
-        <div class="col-sm-6">
-            <table id="bookTable" class="table table-bordered"/>
+    <div class="container">
+        <h3>Welcome to the jQuery book store!</h3>
+        <h4>Currently we have <span id="bookCount"></span> books in our store.</h4>
+        <p>Try searching for books by entering author, title or ISBN</p>
+        <input type="text" id="searchInput" required>
+        <br />
+        <br />
+        <button type="button" id="searchButton"
+                class="btn btn-primary"
+                onclick="searchForBook();">
+            Search
+        </button>
+        <p id="errorMessage"></p>
+        <br />
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>ISBN</th>
+                    </tr>
+                </thead>
+                <tbody id="listBooks">
+                </tbody>
+            </table>
         </div>
+        <h3>Enter details and create a new book!</h3>
+        <div>
+            <div class="">
+                <label for="author">Author</label> <br />
+                <input type="text" id="author">
+            </div>
+            <div class="">
+                <label for="title">Title</label> <br />
+                <input type="text" id="title">
+            </div>
+            <div class="">
+                <label for="isbn">ISBN</label> <br />
+                <input type="text" id="isbn">
+            </div>
+            <br />
+        </div>
+        <button type="button" id="createButton"
+                class="btn btn-primary"
+                onclick="createBook();">
+            Save
+        </button>
+        <br />
+        <p id="createBookMessage"></p>
     </div>
-
-
 </body>
 </html>

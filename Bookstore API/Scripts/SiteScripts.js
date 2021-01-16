@@ -1,49 +1,106 @@
 ﻿$(document).ready(function () {
-
-
-
+    getBookCount()
 });
 
-
-
 function searchForBook() {
-    var isbn = $("#searchInput").val();
-    console.log("input", isbn)
+    var input = $("#searchInput").val();
+    resetMessageFields()
+    if (input) {
+        $('#listBooks').empty()
         $.ajax({
-            url: '/api/bookinfo/?ISBN='+isbn,
+            url: '/api/book/search?input=' + input,
             type: 'GET',
             dataType: 'json',
             success: function (books) {
                 createHtmlTable(books);
             },
-            error: function (request, message, error) {
-                handleException(request, message, error);
+            error: function (request) {
+                $('#errorMessage').text(request.responseText)
             }
         });
+        $("#searchInput").val('')
+    }
+    else {
+        $('#errorMessage').text('Please enter a search string.')
+    }
+}
+
+function createBook() {
+    resetMessageFields()
+    var data = createBookObject()
+    if (dataIsValid(data)) {
+        $.ajax({
+            type: 'POST',
+            url: 'api/book/create',
+            data: data,
+            dataType: 'json',
+            success: function (message) {
+                $('#createBookMessage').text(message)
+                resettInputs()
+                getBookCount()
+            },
+            error: function (request) {
+                $('#createBookMessage').text(request.responseText)
+                resettInputs()
+            }
+        });
+    }
+    else {
+        $('#createBookMessage').text('missing required field input')
+    }
+}
+
+function getBookCount() {
+    $.ajax({
+        url: '/api/book/getCount',
+        type: 'GET',
+        dataType: 'json',
+        success: function (count) {
+            $('#bookCount').text(count);
+        },
+        error: function (request) {
+            alert(request.responseText)
+        }
+    });
 }
 
 function createHtmlTable(books) {
-    console.log(books)
-    var table = $('#bookTable');
-    table.html('');
-    table.append('<thead>');
-    table.append('<tr>');
-    table.append('<th>Author</td>');
-    table.append('<th>Title</td>');
-    table.append('<th>ISBN</td>');
-    table.append('</tr>');
-    table.append('</thead>');
-    table.append('<tbody>');
-    $.each(books, function (i, item) {
+    var tableBody = ''
+    for (var i = 0; i < books.length; i++) {
+        tableBody +=
+            '<tr>' +
+            '<td> ' + books[i].Author + '</td >' +
+            '<td>' + books[i].Title + '</td>' +
+            '<td>' + books[i].ISBN + '</td>' +
+            '</tr >'
+    };
+    $('#listBooks').append(tableBody);
+}
 
-        table.append('<tr>');
-        table.append('<td>' + item.Author + '</td>');
-        table.append('<td>' + item.Title + '</td>');
-        table.append('<td>' + item.ISBN + '</td>');
-        table.append('</tr>');
-    });
-    table.append('</tbody>');
-    table.append('</table>');
+function createBookObject() {
+    return {
+        'Author': $('#author').val(),
+        'Title': $('#title').val(),
+        'ISBN': $('#isbn').val(),
+    }
+}
+
+function dataIsValid(data) {
+    if (data.Author && data.Title && data.ISBN) {
+        return true
+    }
+    return false
+}
+
+function resettInputs() {
+    $('#author').val('')
+    $('#title').val('')
+    $('#isbn').val('')
+}
+
+function resetMessageFields() {
+    $('#errorMessage').text('')
+    $('#createBookMessage').text('')
 }
 
 

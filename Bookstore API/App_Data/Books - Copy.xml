@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Library>
   <Book>
     <Title>The Name of the Wind</Title>
@@ -54,15 +54,10 @@
     <Title>Half the World</Title>
     <Author>Joe Abercrombie</Author>
     <ISBN>9781490654829</ISBN>
-  </Book>
+  </Book>  
   <Book>
     <Title>the hitchhiker's guide to the galaxy</Title>
     <Author>Douglas Adams</Author>
     <ISBN>9788970137506</ISBN>
-  </Book>
-  <Book>
-    <Title>ha</Title>
-    <Author>ha</Author>
-    <ISBN>ha</ISBN>
   </Book>
 </Library>
