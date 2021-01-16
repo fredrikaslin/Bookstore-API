@@ -86,7 +86,9 @@ function createBookObject() {
 }
 
 function dataIsValid(data) {
-    if (data.Author && data.Title && data.ISBN) {
+    if (data.Author.trim() &&
+        data.Title.trim() &&
+        data.ISBN.trim()) {
         return true
     }
     return false
