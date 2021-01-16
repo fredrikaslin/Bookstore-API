@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Library>
   <Book>
     <Title>The Name of the Wind</Title>
@@ -59,5 +59,10 @@
     <Title>the hitchhiker's guide to the galaxy</Title>
     <Author>Douglas Adams</Author>
     <ISBN>9788970137506</ISBN>
+  </Book>
+  <Book>
+    <Title>7 eves</Title>
+    <Author>Neal Stephenson</Author>
+    <ISBN>123456789</ISBN>
   </Book>
 </Library>
